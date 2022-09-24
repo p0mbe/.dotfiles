@@ -53,7 +53,7 @@ set title
 set nu
 
 " Line wrapping
-set nowrap
+set wrap
 set linebreak
 set showbreak=▹
 
