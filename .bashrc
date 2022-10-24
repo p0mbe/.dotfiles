@@ -8,18 +8,24 @@ case $- in
       *) return;;
 esac
 
+# History file
+export HISTFILE=~/.bash_history
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+export HISTSIZE=50000
+export HISTFILESIZE=50000
+
 # avoid duplicates..
 export HISTCONTROL=ignoredups:erasedups
 
 # append history entries..
 shopt -s histappend
 
-# After each command, save and reload history
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+# Clear current value of PROMPT_COMMAND
+unset PROMPT_COMMAND
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=100000
-HISTFILESIZE=200000
+# Save and reload the history after each command finishes
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -106,40 +112,6 @@ esac
 
 [ "$NEWLINE_BEFORE_PROMPT" = yes ] && PROMPT_COMMAND="PROMPT_COMMAND=echo"
 
-# --------------------------------- ALIASES -----------------------------------
-alias ..='cd ..'
-alias cp='cp -v'
-alias rm='rm -I'
-alias mv='mv -iv'
-alias ln='ln -sriv'
-alias xclip='xclip -selection c'
-command -v vim > /dev/null && alias vi='vim'
-
-### Colorize commands
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-alias diff='diff --color=auto'
-alias ip='ip --color=auto'
-
-### LS & TREE
-alias ll='ls -la'
-alias la='ls -A'
-alias l='ls -F'
-command -v lsd > /dev/null && alias ls='lsd --group-dirs first' && alias tree='lsd --tree'
-
-# CAT & LESS
-# command -v bat > /dev/null && \
-# 	alias bat='bat --theme=ansi' && \
-# 	alias cat='bat --pager=never' && \
-# 	alias less='bat'
-# in debian the command is batcat
-# command -v batcat > /dev/null && \
-# 	alias batcat='batcat --theme=ansi' && \
-# 	alias cat='batcat --pager=never' && \
-# 	alias less='batcat'
-
 export VISUAL=vim
 export EDITOR=$VISUAL
 
@@ -148,16 +120,6 @@ export TERM=xterm-256color
 
 # enable terminal linewrap
 setterm -linewrap on 2> /dev/null
-
-# colorize man pages
-export LESS_TERMCAP_mb=$'\e[1;32m'
-export LESS_TERMCAP_md=$'\e[1;32m'
-export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[01;33m'
-export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[1;4;31m'
-export LESSHISTFILE=-
 
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'

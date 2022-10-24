@@ -15,9 +15,7 @@ linkfinder(){
 }
 
 am(){
-    rot=$(echo $1 | unfurl format %r.%t)
-    mkdir -p $HOME/.config/amass/db/$rot
-    amass enum -dir $HOME/.config/amass/db/$rot -src -d $1 -o $1.txt
+    amass enum -d $1 -o $1.txt
 }
 
 dsearch(){
@@ -47,5 +45,4 @@ ffuf_cols(){
     dom=$(echo $1 | unfurl format %d)
     find $HOME/ffuf_output/$rot/$dom/ -type f -name '*.csv' | xargs cat | cut -d, -f2,4- | awk -F, 'BEGIN { OFS=FS }; { $1=substr($1, 1, 110); print }' | sort -t, -k4,4 -k2,2 -n -u | column -s, -t | vim -
 }
-
 
