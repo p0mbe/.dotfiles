@@ -71,5 +71,5 @@ command -v lsd > /dev/null && alias ls='lsd --group-dirs first' && alias tree='l
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-export PATH=$HOME/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/bin:$PATH
